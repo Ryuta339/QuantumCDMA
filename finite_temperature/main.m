@@ -26,7 +26,7 @@ for s=ss
 		op_st(:, alpha_id) = op0;
 		alpha_id = alpha_id + 1;
 	end
-	str1 = sprintf('./results_desc/op_%d.mat', s_id);
+	str1 = sprintf('./results_asc/op_%d.mat', s_id);
 	save_file(str1, op_st);
 
 	op0(1,1) = 1;
