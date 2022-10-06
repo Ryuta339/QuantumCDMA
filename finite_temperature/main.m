@@ -1,6 +1,7 @@
 alphas = [0.001,0.005:0.005:1];
 ss = [0:0.05:1];
-t0 = 0;
+t0 = 0; % channel noise
+beta = 10; % inverse temperature
 
 options = optimoptions('fsolve', 'Display', 'none', 'MaxIter', 1e3, 'TolFun', 1e-10, 'FiniteDifferenceType', 'central');
 DVI = 400;
@@ -19,7 +20,7 @@ for s=ss
 	exitflag = 1;
 	alpha_id = 1;
 	for alpha=alphas
-		fun = @(op) saddle_point_eq(op, alpha, s, 10, t0, zz, Dzz);
+		fun = @(op) saddle_point_eq(op, alpha, s, beta, t0, zz, Dzz);
 		[op_out, ~, exitflag, ~] = fsolve(fun, op0, options);
 		op0 = op_out;
 		op_st(:, alpha_id) = op0;
